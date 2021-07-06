@@ -17,7 +17,7 @@ const cargarMarcas = async()=>{
 document.addEventListener("DOMContentLoaded", ()=>{
     cargarMarcas();
 });
-cargarMarcas();
+//cargarMarcas();
 document.querySelector("#registrar-btn").addEventListener("click", async ()=>{
     let nombre = document.querySelector("#nombre-txt").value;
     let marca = document.querySelector("#marca-select").value;
@@ -38,4 +38,6 @@ document.querySelector("#registrar-btn").addEventListener("click", async ()=>{
     //aqui a redirigir a otra pagina
 
     window.location.href = "ver_consolas";
+    //abrir nueva pestaña
+    //window.open("www.google.cl", "_blank");
 });
