@@ -1,3 +1,16 @@
+const cargarMarcas = async ()=>{
+    //1. Ir a buscar el filtro-cbx
+    let filtroCbx = document.querySelector("filtro-cbx");
+    //2. Ir a buscar las marcas
+    let marcas = await getMarcas();
+    marcas.forEach(m=>{
+        let option = document.createElement("option");
+        option.innerText = m;
+        option.value = m;
+        filtroCbx.appendChild(option);
+    });
+};
+
 const iniciarEliminacion = async function(){
     let id = this.idConsola;
     let resp = await Swal.fire({title:"Está seguro?", text:"Esta operación es irreversible"
@@ -47,11 +60,18 @@ const cargarTabla = (consolas)=>{
     }
 
 };
+//el listener change sirve para cuando quieres ejecutar algo cuando el valor cambia
+document.querySelector("filtro-cbx").addEventListener("change", async ()=>{
+    let filtro = document.querySelector("filtro-cbx").value;
+    let consolas = await getConsolas(filtro);
+    cargarTabla(consolas)
+});
 
 document.addEventListener("DOMContentLoaded", async()=>{
     //aqui voy a cargar la tabla de las consolas porque si entra aqui
     // lo que haga en esta parte estoy seguro que se esta ejecutando
     //cuando la pagina esta totalmente cargada
+    await cargarMarcas();
     let consolas = await getConsolas();
     //console.log(consolas);
     cargarTabla(consolas);
